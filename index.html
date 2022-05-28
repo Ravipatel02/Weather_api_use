@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather</title>
+    <style>
+        body{
+            background-color: skyblue;
+        }
+        #nav{
+            width: 100%;
+            display: flex;
+            height: 80px;
+
+            
+        }
+        input{
+            display: flex;
+            width: 30%;
+            height: 40px;
+            align-items: center;
+            margin: auto;
+            border-radius: 10px;
+            margin-left: 20%;
+        }
+        button{
+            margin: auto;
+            margin-right: 40%;
+            height: 40px;
+            border-radius: 5px;
+            background-color: aqua;   
+            
+        }
+        #container{
+            display: grid;
+            width: 90%;
+            grid-template-columns: repeat(2 ,1fr);
+            grid-template-rows: repeat(1,400px);
+            margin: auto;
+            gap: 20px;
+            
+        }
+    
+        iframe{
+            width: 100%;
+            height: 100%;
+        }
+        
+        .alldata{
+            margin-left: 5%;
+
+        }
+        .alldata>img{
+            width: 100%;
+            height: 400px;
+        }
+        h1,p{
+            margin-left: 20px;
+            color: white;
+            font-weight: 70px;
+        }
+        
+        
+        
+
+    </style>
+</head>
+<body>
+    <div id="nav">
+    <input type="text" name="" id="city" placeholder="Enter City Name">
+    <button onclick="find()">Find Weather</button>
+</div>
+    <div id="container">
+        <img src="data:image/jpeg;base64,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" alt="" width="100%" height="500px">
+
+        <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies-online.net"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://www.embedgooglemap.net">adding google maps to wordpress</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
+
+        
+
+
+    </div>
+    
+</body>
+</html>
+<script src="index.js"></script>
